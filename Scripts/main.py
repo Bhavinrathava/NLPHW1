@@ -5,8 +5,8 @@ from collections import Counter
 
 def main():
     #sampleTokenizerTest()
-    data = readData('Data/wiki2.train.txt')
-    testData = readData('Data/wiki2.test.txt')
+    data = readData('../Data/wiki2.train.txt')
+    testData = readData('../Data/wiki2.test.txt')
     
     data = preprocessData(data)
     testData = preprocessData(testData)
