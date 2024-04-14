@@ -4,7 +4,7 @@ import math as m
 
 
 def main():
-    sampleTokenizerTest()
+    #sampleTokenizerTest()
     pass
 
 def sampleTokenizerTest():
