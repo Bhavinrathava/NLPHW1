@@ -2,6 +2,10 @@ import transformers as tr
 from nltk.tokenize import WordPunctTokenizer as wpt
 import math as m
 from collections import Counter
+import sys
+from pretrainedGPT2LMHeadModel import wiki2testGPTLMHeadModel
+from examplesPerplexityGPTLMHeadMOdel import examplesGPTLMHeadModel
+
 
 def main():
     #sampleTokenizerTest()
@@ -24,6 +28,9 @@ def main():
         perplexity = calculatePerplexityForNGram(trainGPT2Tokens, testGPT2Tokens, n)
         print(f'Perplexity of the model using GPT2FastTokenizer and {n}-grams: {perplexity}')
     pass
+
+    wiki2testGPTLMHeadModel()
+    examplesGPTLMHeadModel()
 
 def preprocessData(data):
     # Preprocess the data

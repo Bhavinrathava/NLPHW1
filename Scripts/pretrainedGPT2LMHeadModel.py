@@ -16,15 +16,10 @@ def read_data_wiki2test(file_path):
     return data
 
 def encode_data(tokenizer, data, max_length=1024):
-    # Encode the data and split into chunks of max_length
+    # Encode the data and split into chunks of max_length   
     chunks = [data[i:i + max_length] for i in range(0, len(data), max_length)]
-
-    # Tokenize each chunk
-    
-    encoded_chunks = [tokenizer.encode(chunk, truncation=True, max_length=max_length) for chunk in chunks]
-
+    encoded_chunks = [tokenizer.encode(chunk, return_tensors='pt') for chunk in chunks]
     return encoded_chunks
-    
 
 def calculate_perplexity_wiki2test(model, encoded_chunks):
     # Calculate the perplexity for each chunk and return the average
@@ -40,11 +35,11 @@ def calculate_perplexity_wiki2test(model, encoded_chunks):
     return sum(perplexities) / len(perplexities)  # Return average perplexity
 
 def wiki2testGPTLMHeadModel():
-    model, tokenizer = load_model_and_tokenizer()
-    data = read_data_wiki2test('Data/wiki2.test.txt')
-    encoded_chunks = encode_data(tokenizer, data)
-    avg_perplexity = calculate_perplexity_wiki2test(model, encoded_chunks)
-    print(f'Average Perplexity for wiki2test: {avg_perplexity}')
+    model, tokenizer = load_model_and_tokenizer() # Load the pre-trained GPT-2 model and tokenizer
+    data = read_data_wiki2test('Data/wiki2.test.txt') # Read the test data from a file
+    encoded_chunks = encode_data(tokenizer, data)   # Encode the data and split into chunks of max_length = 1024
+    avg_perplexity = calculate_perplexity_wiki2test(model, encoded_chunks) # Calculate the perplexity for each chunk and return the average
+    print(f'Average Perplexity for wiki2test: {avg_perplexity}') # Print the average perplexity
 
 if __name__ == "__main__":
     wiki2testGPTLMHeadModel()
